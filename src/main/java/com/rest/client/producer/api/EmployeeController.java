@@ -24,19 +24,21 @@ public class EmployeeController extends AbstractController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<EmployeeResponse> addEmployee(EmployeeModel employeeModel) {
+    public ResponseEntity<EmployeeResponse> addEmployee(@RequestBody
+                                                        EmployeeModel employeeModel) {
         Employee employee = employeeService.add(employeeModel);
         return deferredResult(employee, true);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<EmployeeResponse> updateEmployee(EmployeeModel employeeModel) {
+    public ResponseEntity<EmployeeResponse> updateEmployee(@RequestBody
+                                                           EmployeeModel employeeModel) {
         Employee employee = employeeService.update(employeeModel);
         return deferredResult(employee, false);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<EmployeeResponse> updateEmployee(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<EmployeeResponse> deleteEmployee(@PathVariable(name = "id") Long id) {
         employeeService.delete(id);
         return deferredResult();
     }
