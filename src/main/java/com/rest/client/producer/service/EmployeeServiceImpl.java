@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee update(EmployeeModel employeeModel) {
-        Employee employee = prepareEmployeeEntity(employeeModel);
+        var employee = prepareEmployeeEntity(employeeModel);
         employeeRepository.findById(employee.getId()).orElseThrow(() -> new EmployeeNotFound(
                 "Employee not found for update" + employee.getId()));
         return employeeRepository.save(employee);

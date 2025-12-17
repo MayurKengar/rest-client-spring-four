@@ -1,15 +1,12 @@
 package com.rest.client.producer.api;
 
 
-import com.rest.client.producer.entity.Employee;
 import com.rest.client.producer.model.EmployeeModel;
 import com.rest.client.producer.response.EmployeeResponse;
 import com.rest.client.producer.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -19,22 +16,19 @@ public class EmployeeController extends AbstractController {
 
     @GetMapping("/")
     public ResponseEntity<EmployeeResponse> getAllEmployee() {
-        List<Employee> employee = employeeService.getAllEmployee();
-        return deferredResult(employee);
+        return deferredResult(employeeService.getAllEmployee());
     }
 
     @PostMapping("/add")
     public ResponseEntity<EmployeeResponse> addEmployee(@RequestBody
                                                         EmployeeModel employeeModel) {
-        Employee employee = employeeService.add(employeeModel);
-        return deferredResult(employee, true);
+        return deferredResult(employeeService.add(employeeModel), true);
     }
 
     @PutMapping("/update")
     public ResponseEntity<EmployeeResponse> updateEmployee(@RequestBody
                                                            EmployeeModel employeeModel) {
-        Employee employee = employeeService.update(employeeModel);
-        return deferredResult(employee, false);
+        return deferredResult(employeeService.update(employeeModel), false);
     }
 
     @DeleteMapping("/delete/{id}")
